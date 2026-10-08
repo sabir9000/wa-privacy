@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WA Privacy</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+    <symbol id="i-eyeoff" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M9.9 5.2A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6A17.4 17.4 0 0 0 2 12s3.6 7 10 7a10 10 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+    <symbol id="i-half" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></symbol>
+    <symbol id="i-name" viewBox="0 0 24 24"><path d="M5 7h14M5 12h9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-photo" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-preview" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-messages" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-media" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="m4 18 5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="4" cy="6" r="1.4" fill="currentColor"/><circle cx="4" cy="12" r="1.4" fill="currentColor"/><circle cx="4" cy="18" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-reload" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="15.5" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <header class="top">
+    <svg class="logo" width="20" height="20"><use href="#i-shield"/></svg>
+    <h1>WA Privacy</h1>
+    <label class="switch" title="Pause or resume blur everywhere (Alt+B)">
+      <input id="enabled" type="checkbox" role="switch" aria-label="Blur on">
+      <span></span>
+    </label>
+  </header>
+
+  <main>
+    <section class="lockview" id="lockview" hidden>
+      <div class="hero">
+        <div class="row">
+          <span class="info-ic lock-ic"><svg width="18" height="18"><use href="#i-lock"/></svg></span>
+          <div class="info who"><b>WhatsApp Web is locked</b><span id="lock-reason"></span></div>
+        </div>
+      </div>
+      <form id="unlock-form" class="pinform">
+        <input id="unlock-pin" class="pin" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="Enter PIN" aria-label="PIN">
+        <p class="err" id="unlock-err" role="alert"></p>
+        <button type="submit" class="btn wide" id="unlock-btn">Unlock</button>
+      </form>
+    </section>
+
+    <div class="banner" id="banner" hidden>
+      <svg width="18" height="18"><use href="#i-pause"/></svg>
+      <div><b>Paused: nothing is blurred</b><span>Every chat is fully visible right now.</span></div>
+      <button type="button" class="btn warn" id="resume">Resume</button>
+    </div>
+
+    <!-- App lock sits on top, outside .pausable: pausing blur doesn't affect the lock. -->
+    <section class="applock" id="applock">
+      <div class="sec"><span>App lock</span><span id="lock-status"></span></div>
+      <div id="lockbox"></div>
+    </section>
+
+    <div class="pausable" id="pausable">
+      <!-- Chat card, or the "No chat open" / "Not on WhatsApp Web" card -->
+      <section class="hero" id="hero"></section>
+
+      <!-- This chat's parts (only when a chat is open) -->
+      <section id="chat-parts" hidden>
+        <div class="sec"><span>Parts of this chat</span><span id="chat-count"></span></div>
+        <ul class="items" id="chat-items"></ul>
+      </section>
+
+      <!-- Settings for all chats: inline when no chat is open, folded under the chat otherwise -->
+      <details class="others" id="others">
+        <summary>
+          <span>Settings for all other chats</span>
+          <svg class="chev" width="14" height="14"><use href="#i-chev"/></svg>
+        </summary>
+        <div class="others-body">
+          <section>
+            <div class="sec"><span>All chats</span><span id="default-count"></span></div>
+            <p class="note">Applies to every chat you haven't set yourself.</p>
+            <ul class="items" id="default-items"></ul>
+          </section>
+
+          <section class="opts">
+            <label class="opt">
+              <span class="lbl">Reveal on hover<small>Point at something to peek</small></span>
+              <span class="switch sm"><input id="hover" type="checkbox" role="switch"><span></span></span>
+            </label>
+            <div class="opt">
+              <label class="lbl" for="strength">Blur strength</label>
+              <input type="range" id="strength" min="2" max="20" step="1">
+              <span class="sample" id="sample" aria-hidden="true">Aa</span>
+            </div>
+          </section>
+
+          <section>
+            <div class="sec"><span>Chats you made visible</span><span id="wl-count"></span></div>
+            <div class="items">
+              <label class="search" id="search-row">
+                <svg width="13" height="13"><use href="#i-search"/></svg>
+                <input id="search" type="search" placeholder="Search" aria-label="Search chats">
+              </label>
+              <ul id="wl"></ul>
+              <p class="empty" id="wl-empty" hidden></p>
+            </div>
+          </section>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <footer>
+    <a href="#" id="shortcuts" title="Change keyboard shortcuts"><kbd>Alt</kbd>+<kbd>B</kbd> pause · <kbd>W</kbd> chat · <kbd>L</kbd> lock</a>
+    <span class="io">
+      <button type="button" id="import">Import</button> /
+      <button type="button" id="export">Export</button>
+      <input type="file" id="import-file" accept="application/json,.json" hidden>
+    </span>
+  </footer>
+  <p class="toast" id="toast" role="status" hidden></p>
+
+  <script src="../shared/settings.js"></script>
+  <script src="../shared/lock.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

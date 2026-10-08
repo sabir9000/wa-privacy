@@ -1,0 +1,90 @@
+/* ---------- App lock ----------
+   While locked (and for the first moment after load, until the lock state is
+   known) WhatsApp itself is blurred and can't be clicked. The PIN screen sits on
+   <html>, outside <body>, so it stays sharp. */
+html.wap-locked > body,
+html.wap-lock-pending > body {
+  filter: blur(24px) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* ---------- Eye button in the chat header ---------- */
+.wap-eye {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  margin: 0 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  background: transparent;
+  color: var(--icon, #54656f);
+  transition: background-color .15s ease, box-shadow .15s ease, color .15s ease;
+}
+.wap-eye[hidden] { display: none; }
+.wap-eye svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wap-eye svg .wap-fill { fill: currentColor; stroke: none; }
+.wap-eye:hover { background: rgba(84, 101, 111, .12); }
+.wap-eye:focus-visible { outline: 2px solid #1fa463; outline-offset: 2px; }
+.wap-eye[data-state="show"] {
+  color: #1fa463;
+  background: rgba(31, 164, 99, .12);
+  box-shadow: inset 0 0 0 2px #1fa463;
+}
+.wap-eye[data-state="part"] {
+  color: #b45309;
+  background: rgba(245, 158, 11, .14);
+  box-shadow: inset 0 0 0 2px #d97706;
+}
+
+/* ---------- Eye button in chat list rows ----------
+   Solid green (Visible) / amber (Partly). Blurred chats show it only while the
+   row is hovered, so the list stays clean. */
+.wap-row-eye {
+  width: 24px;
+  height: 24px;
+  /* Negative vertical margin keeps WhatsApp's fixed row height unchanged. */
+  margin: -4px 2px -4px 8px;
+  align-self: center;
+}
+.wap-row-eye svg { stroke-width: 2.4; }
+.wap-row-eye[data-state="show"],
+.wap-row-eye[data-state="show"]:hover {
+  color: #fff;
+  background: #1fa463;
+  box-shadow: none;
+}
+.wap-row-eye[data-state="part"],
+.wap-row-eye[data-state="part"]:hover {
+  color: #fff;
+  background: #d97706;
+  box-shadow: none;
+}
+.wap-row-eye[data-state="blur"] {
+  color: #54656f;
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px #b8c2c8;
+}
+.wap-row-eye:hover { filter: brightness(.92); }
+[data-wap-scope="row"]:not(:hover) .wap-row-eye[data-state="blur"]:not(:focus-visible) { display: none; }
+html:not(.wap-on) .wap-row-eye { display: none; }
+
+/* Fallback when the row has no flex line to sit in. */
+.wap-row-eye-float {
+  position: absolute;
+  right: 72px;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+}

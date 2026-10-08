@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "WA Privacy",
+  "version": "1.0.0",
+  "description": "Blur WhatsApp Web by default and choose, per chat, what you want to see.",
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "shared/settings.js",
+        "shared/lock.js",
+        "content/selectors.js",
+        "content/content.js",
+        "content/lock.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "WA Privacy",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "commands": {
+    "toggle-all": {
+      "suggested_key": {
+        "default": "Alt+B"
+      },
+      "description": "Turn blur on/off everywhere"
+    },
+    "toggle-chat": {
+      "suggested_key": {
+        "default": "Alt+W"
+      },
+      "description": "Open chat: Blurred → Name & photo → Visible"
+    },
+    "lock-now": {
+      "suggested_key": {
+        "default": "Alt+L"
+      },
+      "description": "Lock WhatsApp Web now (app lock)"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
