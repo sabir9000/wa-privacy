@@ -77,7 +77,8 @@ html.wap-lock-pending > body {
 }
 .wap-row-eye:hover { filter: brightness(.92); }
 [data-wap-scope="row"]:not(:hover) .wap-row-eye[data-state="blur"]:not(:focus-visible) { display: none; }
-html:not(.wap-on) .wap-row-eye { display: none; }
+/* While blur is paused nothing is hidden, so no eye buttons (header or rows). */
+html:not(.wap-on) .wap-eye { display: none; }
 
 /* Fallback when the row has no flex line to sit in. */
 .wap-row-eye-float {
