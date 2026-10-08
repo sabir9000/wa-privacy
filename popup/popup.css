@@ -20,6 +20,7 @@
   --warn-line: #f7c9b0;
   --warn-ink: #7c2d12;
   --changed: #fffbeb;
+  --brand: #4f4bc8;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -45,6 +46,7 @@
     --warn-line: #6b3416;
     --warn-ink: #fed7aa;
     --changed: #2a2512;
+    --brand: #8b8cf0;
     color-scheme: dark;
   }
 }
@@ -72,7 +74,7 @@ body.tab .toast { position: absolute; }
 /* ---------- header ---------- */
 .top { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
 .top h1 { font-size: 14px; font-weight: 700; }
-.logo { color: var(--accent); }
+.logo { color: var(--brand); }
 body.paused .logo { color: var(--warn); }
 
 .switch { margin-left: auto; position: relative; width: 34px; height: 19px; flex: none; cursor: pointer; display: inline-block; }
