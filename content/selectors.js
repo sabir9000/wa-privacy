@@ -3,8 +3,9 @@
 // ids, roles and attributes. When blurring stops working after a WhatsApp
 // update, this is the file to fix.
 globalThis.WAP_SEL = {
-  // Left column: chat list, search results, archived chats.
-  chatList: '#pane-side',
+  // Left column: chat list (incl. search results), and the Archived list, which
+  // opens in a separate drawer outside #pane-side.
+  chatList: '#pane-side, [data-testid="archived-chatlist"]',
   chatRow: '[role="listitem"], [role="row"]',
   // First match inside a row is the chat name (its title attr holds the full name).
   rowName: 'span[title], span[dir="auto"]',

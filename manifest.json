@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "WA Privacy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Blur WhatsApp Web by default and choose, per chat, what you want to see.",
   "permissions": [
     "storage",

@@ -85,8 +85,9 @@
 
   function scan() {
     if (!isCurrent()) return;
-    const list = document.querySelector(S.chatList);
-    if (list) list.querySelectorAll(S.chatRow).forEach(tagRow);
+    for (const list of document.querySelectorAll(S.chatList)) {
+      list.querySelectorAll(S.chatRow).forEach(tagRow);
+    }
     const main = document.querySelector(S.conversation);
     if (main) tagConversation(main);
     else currentKey = null;
